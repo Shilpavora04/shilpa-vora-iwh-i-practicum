@@ -6,11 +6,13 @@ html(lang="en")
 
   body
     .wrapper
-      h1 Create a New Book Record
+      h1 Book Management
 
       a(href="/").link Return to the homepage
 
+      //- --- Add New Book Form ---
       .form-wrapper
+        h2 Create a New Book Record
         form(action="/update-cobj" method="POST")
           div.inputField
             label(for="name") Name:
@@ -26,3 +28,4 @@ html(lang="en")
 
           div.inputField
             input(type="submit" value="Create Book")
+
