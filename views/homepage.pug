@@ -1,0 +1,24 @@
+doctype html
+html
+  head
+    title= title
+    meta(name="viewport" content="width=device-width, initial-scale=1")
+    link(rel="stylesheet", href="/css/style.css")
+
+  body
+    .wrapper
+      h1 Custom Object: Books
+      a(href="/update-cobj") Add to this table
+
+      .cards
+        table
+          tr
+            th Name
+            th Author
+            th Genre
+
+          each contact in data
+            tr
+              td.card__name #{contact.properties.name}
+              td.card__author #{contact.properties.author}
+              td.card_genre #{contact.properties.genre}
