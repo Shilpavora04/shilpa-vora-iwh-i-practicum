@@ -16,7 +16,7 @@ const PRIVATE_APP_ACCESS = process.env.PRIVATE_APP_ACCESS;
 
 app.get("/", async (req, res) => {
  const books =
-  "https://api.hubspot.com/crm/v3/objects/books?properties=name,author,genre";
+  "https://api.hubspot.com/crm/v3/objects/2-53954181?properties=name,author,genre";
 
  const headers = {
   Authorization: `Bearer ${PRIVATE_APP_ACCESS}`,
@@ -28,37 +28,19 @@ app.get("/", async (req, res) => {
   const data = resp.data.results;
   res.render("homepage", { title: "Books | HubSpot Custom Object", data });
  } catch (error) {
-  console.error(error);
+  console.error("HubSpot Error:", error.response?.data || error);
   res.send("Error fetching book records");
  }
 });
 
-app.get("/update-cobj", async (req, res) => {
- const email = req.query.email;
-
- const getBook = `https://api.hubapi.com/crm/v3/objects/books/${name}?idProperty=name&properties=name,author,genre`;
- const headers = {
-  Authorization: `Bearer ${PRIVATE_APP_ACCESS}`,
-  "Content-Type": "application/json",
- };
-
- try {
-  const response = await axios.get(getBook, { headers });
-  const data = response.data;
-
-  // res.json(data);
-  res.render("update", {
-   name: data.properties.name,
-   author: data.properties.author,
-   genre: data.properties.genre,
-  });
- } catch (err) {
-  console.error(err);
- }
+app.get("/update-cobj", (req, res) => {
+ res.render("updates", {
+  title: "Update Custom Object Form | Integrating With HubSpot I Practicum",
+ });
 });
 
 app.post("/update-cobj", async (req, res) => {
- const update = {
+ const newRecord = {
   properties: {
    name: req.body.name,
    author: req.body.author,
@@ -66,18 +48,18 @@ app.post("/update-cobj", async (req, res) => {
   },
  };
 
- const name = req.query.name;
- const updateBook = `https://api.hubapi.com/crm/v3/objects/books/${name}?idProperty=name`;
+ const createUrl = "https://api.hubspot.com/crm/v3/objects/2-53954181";
  const headers = {
   Authorization: `Bearer ${PRIVATE_APP_ACCESS}`,
   "Content-Type": "application/json",
  };
 
  try {
-  await axios.patch(updateBook, update, { headers });
-  res.redirect("back");
+  await axios.post(createUrl, newRecord, { headers });
+  res.redirect("/");
  } catch (err) {
-  console.error(err);
+  console.error("HubSpot Error:", err.response?.data || err);
+  res.send("Error creating book record");
  }
 });
 

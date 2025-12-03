@@ -11,8 +11,15 @@ body, * {
 }
 
 h1 {
-    margin: 1rem;
+    margin: 0 0 50px;
     text-align: center;
+    font-size: 40px;
+}
+
+.wrapper .link {
+    text-align: center;
+    margin-bottom: 30px;
+    display: block;
 }
 
 .cards {
@@ -69,6 +76,7 @@ input[type="submit"] {
     cursor: pointer;
     appearance: none;
     -webkit-appearance: none;
+    width: auto !important;
 }
 
 .cards table {
@@ -88,4 +96,12 @@ input[type="submit"] {
 
 .cards table tr:nth-child(odd) {
     background-color: aliceblue;
+}
+
+.inputField {
+    margin-bottom: 15px;
+}
+
+.inputField input {
+    width: 100%;
 }

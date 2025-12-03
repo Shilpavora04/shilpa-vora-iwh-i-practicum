@@ -5,23 +5,24 @@ html(lang="en")
     link(rel="stylesheet", href="/css/style.css")
 
   body
-    h1 Create New Book Record
+    .wrapper
+      h1 Create a New Book Record
 
-    a(href="/") Return to the homepage
+      a(href="/").link Return to the homepage
 
-    .form-wrapper
-      form(action="/update-cobj" method="POST")
-        div
-          label(for="name") Name:
-          input(type="text" name="name" required)
+      .form-wrapper
+        form(action="/update-cobj" method="POST")
+          div.inputField
+            label(for="name") Name:
+            input(type="text" id="name" name="name" required)
 
-        div
-          label(for="author") Author:
-          input(type="text" name="author" required)
+          div.inputField
+            label(for="author") Author:
+            input(type="text" id="author" name="author" required)
 
-        div
-          label(for="genre") Genre:
-          input(type="text" name="genre" required)
+          div.inputField
+            label(for="genre") Genre:
+            input(type="text" id="genre" name="genre" required)
 
-        div
-          input(type="submit" value="Create Book")
+          div.inputField
+            input(type="submit" value="Create Book")
